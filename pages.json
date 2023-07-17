@@ -1,0 +1,72 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	    {
+            "path" : "pages/home/home",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "主页",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/chatList/chatList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "聊天列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/trip/trip",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "行程",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/me/me",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/home.svg",
+				"selectedIconPath": "static/home_active.svg"
+			},
+			{
+				"pagePath": "pages/trip/trip",
+				"iconPath": "static/trip.svg",
+				"selectedIconPath": "static/trip_active.svg"
+			},
+			{
+				"pagePath": "pages/chatList/chatList",
+				"iconPath": "static/chatList.svg",
+				"selectedIconPath": "static/chatList_active.svg"
+			},
+			{
+				"pagePath": "pages/me/me",
+				"iconPath": "static/me.svg",
+				"selectedIconPath": "static/me_active.svg"
+			}
+		]
+	}
+}
