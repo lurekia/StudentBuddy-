@@ -5,7 +5,8 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "主页",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
             }
             
         }
@@ -14,7 +15,8 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "聊天列表",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
             }
             
         }
@@ -23,7 +25,8 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "行程",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
             }
             
         }
@@ -32,6 +35,16 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/chat/chat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "聊天",
                 "enablePullDownRefresh": false
             }
             
@@ -41,8 +54,7 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"navigationStyle": "custom"
+		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {},
 	"tabBar": {

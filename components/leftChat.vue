@@ -1,0 +1,54 @@
+<template>
+	<view class="container">
+		<image :src="props.head_img_url" class="left" mode="aspectFill"></image>
+		<view class="right">
+			<view class="text-container">
+				<text>{{ props.text}}</text>
+			</view>
+		</view>
+	</view>
+</template>
+<script setup>
+	const props = defineProps(["head_img_url", "text"])
+</script>
+<style lang="scss" scoped>
+	.container {
+		margin: 10px 0;
+		display: flex;
+
+		.left {
+			height: 10vw;
+			width: 10vw;
+			border-radius: 5px;
+		}
+	}
+
+	.text-container {
+		max-width: calc(80vw - 30px);
+		min-height: 25px;
+		border-radius: 10px;
+		background-color: rgb(203, 176, 198);
+		position: relative;
+		margin-left: 10px;
+		padding: 10px;
+		text {
+			height: 25px;
+			line-height: 25px;
+			white-space: normal;
+			word-break: break-all;
+		}
+	}
+
+	.text-container::before {
+		position: absolute;
+		top: 15px;
+		left: -19px;
+		content: "";
+		width: 0;
+		height: 0;
+		border-right: 10px solid rgb(203, 176, 198);
+		border-bottom: 10px solid transparent;
+		border-left: 10px solid transparent;
+		border-top: 10px solid transparent;
+	}
+</style>
