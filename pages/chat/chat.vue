@@ -5,8 +5,8 @@
 		<scroll-view class="content" scroll-y="true" :scroll-into-view="`msg${msgs.length-1}`" :scroll-with-animation="true">
 			<view class="msg-list">
 				<view class="msg-item" :id="`msg${index}`" v-for="(msg, index) in msgs" :key="msg.time">
-					<left-chat v-if="msg.left" :text="msg.text" :head_img_url="img_url"></left-chat>
-					<right-chat v-else :text="msg.text" :head_img_url="img_url"></right-chat>
+					<left-chat v-if="msg.left" :msg="msg" :head_img_url="img_url"></left-chat>
+					<right-chat v-else :msg="msg" :head_img_url="img_url"></right-chat>
 				</view>
 			</view>
 		</scroll-view>
@@ -40,74 +40,26 @@ import rightChat from '@/components/rightChat.vue'
 	})
 	const msgs = reactive([
 		{
-			left: false,
-			text: '你是谁',
+			left: true,
+			content: `	# 你是谁\n- 呵呵哒\n## 一人我饮酒醉`,
 			time: "1"
 		},
 		{
-			left: true,
-			text: '你是谁',
+			left: false,
+			content: `# 你是谁 
+					- 呵呵哒 
+					## 一人我饮酒醉`,
 			time: "2"
 		},
 		{
 			left: false,
-			text: '你是谁',
+			content: ' 你是谁',
 			time: "3"
 		},
 		{
 			left: true,
-			text: '你是谁',
+			content: ' 你是谁',
 			time: "4"
-		},
-		{
-			left: false,
-			text: '你是谁',
-			time: "5"
-		},
-		{
-			left: true,
-			text: '你是谁',
-			time: "6"
-		},
-		{
-			left: false,
-			text: '你是谁',
-			time: "7"
-		},
-		{
-			left: true,
-			text: '你是谁',
-			time: "8"
-		},
-		{
-			left: false,
-			text: '你是谁',
-			time: "9"
-		},
-		{
-			left: true,
-			text: '你是谁',
-			time: "10"
-		},
-		{
-			left: false,
-			text: '你是谁',
-			time: "111"
-		},
-		{
-			left: true,
-			text: '你是谁',
-			time: "12"
-		},
-		{
-			left: false,
-			text: '你是谁我是谁，你是谁我是谁，你是谁我是谁你是谁我是谁你是谁我是谁你是谁我是谁你是谁我是谁你是谁我是谁',
-			time: "13"
-		},
-		{
-			left: true,
-			text: '你是谁',
-			time: "14"
 		},
 	]);
 	const scrollTop = ref(0)
@@ -142,13 +94,19 @@ import rightChat from '@/components/rightChat.vue'
 	.chat {
 		width: 100vw;
 		height: calc(100vh - 44px);
+		background-color: rgb(227,227,227);
 	}
 	.content {
 		box-sizing: border-box;
 		height: calc(90vh - 44px);
 		padding: 0 10px;
 	}
-	
+	.msg-list {
+		margin-top: 20rpx;
+	}
+	.msg-item {
+		margin-top: 10rpx;
+	}
 	.bottom-input {
 		display: flex;
 		align-items: flex-end;

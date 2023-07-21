@@ -3,13 +3,29 @@
 		<image :src="props.head_img_url" class="left" mode="aspectFill"></image>
 		<view class="right">
 			<view class="text-container">
-				<text>{{ props.text}}</text>
+				<rich-text :nodes="content"></rich-text>
 			</view>
 		</view>
 	</view>
 </template>
 <script setup>
-	const props = defineProps(["head_img_url", "text"])
+	import {ref, reactive} from 'vue'
+	import MarkdownIt from 'markdown-it';
+	import {
+		onLoad
+	} from '@dcloudio/uni-app'
+	const props = defineProps(["head_img_url", "msg"])
+	const content = ref("")
+	// 解析mardown 为 html字符串
+	const mdToHtml = (mdText) => {
+		console.log(mdText);
+		const md = new MarkdownIt();
+		const htmlText = md.render(mdText);
+		return htmlText;
+	}
+	onLoad((obj) => {
+		content.value = mdToHtml(props.msg.content);
+	})
 </script>
 <style lang="scss" scoped>
 	.container {
@@ -27,7 +43,7 @@
 		max-width: calc(80vw - 30px);
 		min-height: 25px;
 		border-radius: 10px;
-		background-color: rgb(203, 176, 198);
+		background-color: #fff;
 		position: relative;
 		margin-left: 10px;
 		padding: 10px;
@@ -46,7 +62,7 @@
 		content: "";
 		width: 0;
 		height: 0;
-		border-right: 10px solid rgb(203, 176, 198);
+		border-right: 10px solid #fff;
 		border-bottom: 10px solid transparent;
 		border-left: 10px solid transparent;
 		border-top: 10px solid transparent;

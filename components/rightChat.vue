@@ -3,14 +3,14 @@
 		<image :src="props.head_img_url" class="left" mode="aspectFill"></image>
 		<view class="right">
 			<view class="text-container">
-				<text>{{ props.text}}</text>
+				<text>{{ props.msg.content}}</text>
 			</view>
 		</view>
 	</view>
 </template>
 <script setup>
 
-const props = defineProps(["head_img_url","text"])
+const props = defineProps(["head_img_url","msg"])
 
 </script>
 <style lang="scss" scoped>
@@ -28,7 +28,7 @@ const props = defineProps(["head_img_url","text"])
 	max-width: calc(80vw - 30px);
 	min-height: 25px;
 	border-radius: 10px;
-	background-color: rgb(18,183,245);
+	background-color: rgb(150,236,102);
 	position: relative;
 	margin-right: 10px;
 	padding: 10px;
@@ -48,7 +48,7 @@ const props = defineProps(["head_img_url","text"])
 		height: 0;
 		border-right: 10px solid transparent;
 		border-bottom: 10px solid transparent;
-		border-left: 10px solid rgb(18,183,245);
+		border-left: 10px solid rgb(150,236,102);
 		border-top: 10px solid transparent;
 	}
 </style>
