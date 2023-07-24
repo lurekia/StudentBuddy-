@@ -14,12 +14,6 @@
 					<uni-dateformat :date="currentDate" format="yyyy年M月" ref="currentDateShow"></uni-dateformat>
 				</view>
 				<view class="schedule-list-header-btn" @click="nextMonth">下个月</view>
-				<!-- <view class="schedule-list-header-right"> -->
-				<!-- <picker mode="selector" :range=" categories " @change="changeCategory">
-		          <view class="schedule-list-header-category">{{ currentCategory }}</view>
-		        </picker> -->
-				<!-- view -->
-				<!-- </view> -->
 			</view>
 			<!-- 标签 -->
 			<uni-fab :pattern="tag_pattern" :content="tag_content" horizontal="right" vertical="bottom"
@@ -32,9 +26,9 @@
 						<view class="schedule-list-date-item" v-for="(item_time, index_time) in item_date.content" :key="index_time">
 							<view class="item-time">{{item_time.time}}</view>
 							<view class="item-tag iconfont icon-yuan" :style="{color:tagToColor(item_time.tag)}">
-								
 							</view>
 							<view class="item-title">{{item_time.title}}</view>
+							<view class="item-position">{{item_time.position}}</view>
 						</view>
 					</view>
 					
@@ -55,6 +49,7 @@
 	import {
 		onLoad,onInit
 	} from '@dcloudio/uni-app'
+	// import { sortBy } from 'lodash'
 	// 返回标志
 	const goBack = () => {
 		uni.navigateBack({
@@ -68,9 +63,6 @@
 	const prevMonth = () => {
 		console.log(currentDate);
 		currentDate.setMonth(currentDate.getMonth() - 1)
-		// 动态修改
-		// console.log(currentDateShow.value);
-		// currentDateShow.value.date = currentDate;
 	}
 	
 	const nextMonth = () => {
@@ -149,33 +141,6 @@
 		console.log(selectedTag.value);
 	}
 
-	// const filterSchedule = computed(() => {
-	// 	const year = displayYear.value
-	// 	const month = displayMonth.value
-	// 	const monthSchedule = schedule.filter(item => {
-	// 		const date = new Date(item.date)
-	// 		return date.getFullYear() === year && date.getMonth() + 1 === month
-	// 	})
-
-	// 	if (selectedTag.value !== '全部') {
-	// 		monthSchedule = monthSchedule.filter(item => item.tag === selectedTag.value)
-	// 	}
-
-	// 	const daySchedule = monthSchedule.reduce((acc, item) => {
-	// 		const date = item.date.split('-').pop()
-	// 		if (!acc[date]) {
-	// 			acc[date] = []
-	// 		}
-	// 		acc[date].push(item)
-	// 		return acc
-	// 	}, {})
-
-	// 	return Object.entries(daySchedule).map(([date, items]) => ({
-	// 		date,
-	// 		items
-	// 	}))
-	// })
-
 	// 展示列表
 	const schedule = reactive([
 		{
@@ -183,13 +148,40 @@
 			content: [
 				{
 					title: '去比赛',
-					time: '08:00',
-					tag: '竞赛',
+					time: '10:00',
+					tag: '讲座报告',
+					id:'1',
+					position:'G101',
+					detail:'我是详细信息'
 				},
 				{
 					title: '去比赛',
+					time: '08:00',
+					tag: '竞赛',
+					id:'2',
+					position:'G101',
+					detail:'我是详细信息'
+				},
+			]
+		},
+		{
+			date: '2023-07-10',
+			content: [
+				{
+					title: '去比赛',
+					time: '08:00',
+					tag: '会议',
+					id:'3',
+					position:'G101',
+					detail:'我是详细信息'
+				},
+				{
+					title: '去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛去比赛',
 					time: '10:00',
-					tag: '讲座报告',
+					tag: '考前答辩',
+					id:'4',
+					position:'G101',
+					detail:'我是详细信息'
 				}
 			]
 		},
@@ -200,24 +192,13 @@
 					title: '去比赛',
 					time: '08:00',
 					tag: '竞赛',
+					id:'5',
+					position:'G101',
+					detail:'我是详细信息'
 				}
 			]
 		},
-		{
-			date: '2023-07-10',
-			content: [
-				{
-					title: '去比赛',
-					time: '08:00',
-					tag: '会议',
-				},
-				{
-					title: '去比赛',
-					time: '10:00',
-					tag: '考前答辩',
-				}
-			]
-		},
+		
 	])
 	const tagToColor = (tag_name) => {
 		for(var i=0;i<tag_content.length;i++) {
@@ -226,6 +207,23 @@
 				return tag_colors[i];
 		}
 	}
+	onMounted(() => {
+	  // 对所有的天按时间顺序排列
+	  schedule.sort((a, b) => {
+	    return new Date(a.date) - new Date(b.date);
+	  });
+	
+	  // 对每一天里的所有事项按时间顺序排列
+	  schedule.forEach(day => {
+		day.content.sort((a, b) => {
+		  const timeA = a.time.split(':').map(val => parseInt(val, 10));
+		  const timeB = b.time.split(':').map(val => parseInt(val, 10));
+		  const minutesA = timeA[0] * 60 + timeA[1];
+		  const minutesB = timeB[0] * 60 + timeB[1];
+		  return minutesA - minutesB;
+		});
+	  });
+	});
 </script>
 
 <style lang="scss">
@@ -287,17 +285,28 @@
 			background-color: #eee;
 		}
 		.schedule-list-date-item {
+			// position: relative;
 			display: flex;
+			justify-content: space-between;
 			flex-direction: row;
+			// white-space: nowrap;
+		    overflow-x: auto;
+		    // text-overflow: ellipsis;
 			height: 75rpx;
 			line-height: 75rpx;
-			padding: 0 20px;
+			padding: 0 10px;
 			border: 1px solid rgb(244,244,244);
 			.item-tag {
-				margin-left: 40rpx;
+				margin-left: 20rpx;
+				flex: 0 0 auto;
 			}
 			.item-title {
 				margin-left: 20rpx;
+				flex: 1 1 auto;
+			}
+			.item-position {
+				margin-left: 20rpx;
+				flex: 0 0 auto;
 			}
 		}
 	}

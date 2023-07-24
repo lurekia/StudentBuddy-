@@ -18,7 +18,7 @@
 			<view class="my-list-wrapper">
 				<uni-list class="my-list">
 					<uni-list-item  direction="column" v-for="item in selected" :key="item.id" 
-					 thumb-size="lg"  >
+					 thumb-size="lg" @click="showDetail" >
 					<!-- 通过header插槽定义列表的标题 -->
 						<template v-slot:header>
 							<view class="uni-header">
@@ -36,6 +36,8 @@
 				</uni-list>
 			</view>
 		</scroll-view>
+		<!-- <activity-detail :dailogShow = 'dailogShow' ></activity-detail> -->
+		
 	</view>
 	
 	
@@ -46,6 +48,7 @@
 
 <script setup>
 	import { ref, nextTick,reactive } from 'vue'
+	// import activityDetail from '../../components/activityDetail/activityDetail.vue'
 	const activities = reactive([
 		{
 			date:'2023-07-20',
@@ -117,6 +120,11 @@
 	nextTick(() => {
 	  showCalendar.value = true
 	})
+	// const dailogShow = reactive(false)
+	// const showDetail = () => {
+	// 	dailogShow = true
+	// 	console.log('555');
+	// }
 	function changeDate(e) {
 		// 清空数组
 	  selected.splice(0);
