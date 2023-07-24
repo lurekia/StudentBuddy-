@@ -1,6 +1,7 @@
 <template>
 	<view class="chat">
 		<!-- 主要聊天页面 -->
+		
 		<scroll-view class="content" scroll-y="true" :scroll-into-view="`msg${msgs.length-1}`" :scroll-with-animation="true">
 			<view class="msg-list">
 				<view class="msg-item" :id="`msg${index}`" v-for="(msg, index) in msgs" :key="msg.time">
@@ -11,6 +12,7 @@
 		</scroll-view>
 		<view class="bottom-input">
 			<text class="iconfont icon-yuyin icon"></text>
+			
 			<view class="textarea-container">
 				<textarea auto-height fixed="true" confirm-type="send" v-model="input" @confirm="submit" />
 			</view>
@@ -70,7 +72,7 @@ import rightChat from '@/components/rightChat.vue'
 		if (input.value === "") return;
 		msgs.push({
 			left: false,
-			text: input.value,
+			content: input.value,
 			time: new Date().getTime(),
 		});
 		// 此处会有异步询问和错误处理
@@ -78,7 +80,7 @@ import rightChat from '@/components/rightChat.vue'
 
 		msgs.push({
 			left: true,
-			text: receiveText,
+			content: receiveText,
 			time: new Date().getTime(),
 		});
 		input.value = "";

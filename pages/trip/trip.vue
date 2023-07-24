@@ -4,7 +4,7 @@
 			校园日历
 		</view>
 		<view class="list-icon" @click="goToList()">
-			<uni-icons type="list" size="20" color="#fff"></uni-icons>
+			<uni-icons type="list" size="20" color="#fff" ></uni-icons>
 		</view>
 		<view class="calendar-wrapper">
 			<uni-calendar
@@ -142,6 +142,7 @@
 
 <style lang="scss" scoped>
 	.list-icon {
+		z-index: 10000;
 		position: fixed;
 		top: 30rpx;
 		right: 120rpx;
