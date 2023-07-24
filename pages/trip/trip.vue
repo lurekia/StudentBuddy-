@@ -14,26 +14,28 @@
 			 @monthSwitch="monthSwitch"	
 			/>
 		</view>
-		<view class="my-list-wrapper">
-			<uni-list class="my-list">
-				<uni-list-item  direction="column" v-for="item in selected" :key="item.id" 
-				 thumb-size="lg" @click="goToList()" >
-				<!-- 通过header插槽定义列表的标题 -->
-					<template v-slot:header>
-						<view class="uni-header">
-							<view class="uni-title">{{item.title}}</view>
-							<text class="uni-footer-position">{{item.position}}</text>
-						</view>
-					</template>
-						<!-- 同步footer插槽定义列表底部的显示效果 -->
-					<template v-slot:footer>
-						<view class="uni-footer">
-							<text class="uni-footer-time">{{item.time}}</text>
-						</view>
-					</template>
-				</uni-list-item>
-			</uni-list>
-		</view>
+		<scroll-view scroll-y="true" >
+			<view class="my-list-wrapper">
+				<uni-list class="my-list">
+					<uni-list-item  direction="column" v-for="item in selected" :key="item.id" 
+					 thumb-size="lg"  >
+					<!-- 通过header插槽定义列表的标题 -->
+						<template v-slot:header>
+							<view class="uni-header">
+								<view class="uni-title">{{item.title}}</view>
+								<text class="uni-footer-position">{{item.position}}</text>
+							</view>
+						</template>
+							<!-- 同步footer插槽定义列表底部的显示效果 -->
+						<template v-slot:footer>
+							<view class="uni-footer">
+								<text class="uni-footer-time">{{item.time}}</text>
+							</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</view>
+		</scroll-view>
 	</view>
 	
 	
@@ -146,6 +148,8 @@
 		position: fixed;
 		top: 30rpx;
 		right: 120rpx;
+		// 奇怪  莫名其妙要加一个z-index  否则就会被覆盖
+		z-index: 99 
 	}
 	.uni-title {
 		font-weight: 550;
