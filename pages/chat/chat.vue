@@ -12,7 +12,6 @@
 		</scroll-view>
 		<view class="bottom-input">
 			<text class="iconfont icon-yuyin icon"></text>
-			
 			<view class="textarea-container">
 				<textarea auto-height fixed="true" confirm-type="send" v-model="input" @confirm="submit" />
 			</view>

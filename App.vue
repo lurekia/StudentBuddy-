@@ -15,7 +15,7 @@
 <style>
 	/*每个页面公共css */
 	
-	@import url('http://at.alicdn.com/t/c/font_4171624_j4ewm9ffumj.css');
+	@import url('http://at.alicdn.com/t/c/font_4171624_5f91t8g1imo.css');
 	view {
 		box-sizing: border-box;
 	}
