@@ -38,28 +38,7 @@ import rightChat from '@/components/rightChat.vue'
 		})
 	})
 	const msgs = reactive([
-		{
-			left: true,
-			content: `	# 你是谁\n- 呵呵哒\n## 一人我饮酒醉`,
-			time: "1"
-		},
-		{
-			left: false,
-			content: `# 你是谁 
-					- 呵呵哒 
-					## 一人我饮酒醉`,
-			time: "2"
-		},
-		{
-			left: false,
-			content: ' 你是谁',
-			time: "3"
-		},
-		{
-			left: true,
-			content: ' 你是谁',
-			time: "4"
-		},
+		
 	]);
 	const scrollTop = ref(0)
 	const input = ref("");
@@ -74,8 +53,15 @@ import rightChat from '@/components/rightChat.vue'
 			content: input.value,
 			time: new Date().getTime(),
 		});
-		// 此处会有异步询问和错误处理
-		const receiveText = "不知道";
+		if(input.value === "你好，小助手，我喜欢街舞，你能给我推荐一下相关社团吗？") {
+			const receiveText = "你好，以下是根据您的爱好：街舞，自动匹配到合适的社团： 凤舞社。						详细介绍：作为哈工大威海星级社团评选六连冠   hiphop（嘻哈舞）、popping（机械舞）、breaking（地板舞）、Locking（锁舞）、Jazz（爵士）、urban（编舞）、kpop（男女韩舞）！我们一个不少，任您选择。";
+		}
+		if(input.value === "这个社团训练时间是什么时候呀？") {
+			const receiveText = "每周一到周四21：25--22:20 紧张学习的晚自习过后，欢迎来大活101室";
+		}
+		if(input.value === "最近学校有哪些讲座可以参加？") {
+			const receiveText = "【光电·讲座】高能激光尾波加速和增强型固体高次谐波实验研究进展及激光等离子体不稳定性及其抑制研究                                                            主讲人：陈民、翁苏明   主办单位：理学院光电科学系 地点：主楼H124   时间：2023年7月31日上午8:30-11:30  "       
+			}
 
 		msgs.push({
 			left: true,

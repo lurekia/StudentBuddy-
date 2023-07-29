@@ -30,111 +30,42 @@
 import {reactive, ref} from 'vue'
 
 const chat_views = reactive([
+	
 	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
+		tag:"活动我先知",
+		name:"活动我先知",
+		head_img_url:"@/static/img3.jpg",
+		last_word:"",
+		last_word_date:""
 	},
 	{
-		tag:"小助手",
-		name:"哈小助",
+		tag:"新生引导员",
+		name:"新生引导员",
 		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
+		last_word:"",
+		last_word_date:""
 	},
 	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
+		tag:"餐厅探店侠",
+		name:"餐厅探店侠",
+		head_img_url:"@/static/img1.jpg",
+		last_word:"",
+		last_word_date:""
 	},
 	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
+		tag:"预约助手",
+		name:"预约助手",
+		head_img_url:"@/static/img2.jpg",
+		last_word:"",
+		last_word_date:""
 	},
 	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
+		tag:"学习助手",
+		name:"学习助手",
+		head_img_url:"@/static/img4.jpg",
+		last_word:"",
+		last_word_date:""
 	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	}
 ]);
 
 // 点击跳转聊天界面
