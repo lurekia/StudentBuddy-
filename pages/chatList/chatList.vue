@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<!-- 所有好友列表 -->
-		<scroll-view class="content" scroll-y="true"> 
+		<!-- <scroll-view class="content" scroll-y="true"> 
 			<ul>
 				<li v-for="(chat, index) in chat_views" :key="index" class="chat-view" @click="handleClick(chat)">
 					<image src="@/static/head.jpeg" mode="aspectFill" class="chat-img"></image>
@@ -22,128 +22,72 @@
 					</view>
 				</li>
 			</ul>
-		</scroll-view>
+		</scroll-view> -->
+		<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" :options="options" collection="server_list" orderby="last_word_date desc">
+		  <view v-if="error">{{error.message}}</view>
+		  <view v-else-if="loading">
+		    <uni-load-more :contentText="loadMore" status="loading"></uni-load-more>
+		  </view>
+		  <view v-else-if="data">
+			<uni-list>
+				<uni-list :border="true">
+					<uni-list-chat 
+					 v-for="chat in data" 
+					 :key="chat._id"
+					:title="chat.name" 
+					:avatar="chat.avatar" 
+					:note="formatWord(chat.last_word)" 
+					:time="formatDate(chat.last_word_date)" 
+					 :clickable="true"
+					@click="handleClick(chat)"
+					></uni-list-chat>
+				</uni-list>
+			</uni-list>
+		  </view>
+		</unicloud-db>
+		
 	</view>
 </template>
 
 <script setup>
 import {reactive, ref} from 'vue'
-
-const chat_views = reactive([
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	},
-	{
-		tag:"小助手",
-		name:"哈小助",
-		head_img_url:"@/static/头像.jpeg",
-		last_word:"hello, 我是你的小助手",
-		last_word_date:"星期三"
-	}
-]);
-
+import {
+		onLoad
+	} from '@dcloudio/uni-app'
+let chat_views = reactive([]);
+const udb = ref()
 // 点击跳转聊天界面
 const handleClick = (chat) => {
+	console.log(chat);
 	uni.navigateTo({
-		url:`/pages/chat/chat?name=${chat.name}`
+		url:`/pages/chat/chat?name=${chat.name}&url=${chat.avatar}&id=${chat._id}`, // 传递url感觉有点不好
+		
 	})
+	console.log("父组件中：",udb);
+	// console.log("传输信息给下一个");
+	// uni.$emit('listToChat',chat.avatar)
 }
-
+const formatDate = (time) => {
+	const someDate = new Date(time);
+	return someDate.toLocaleDateString();
+}
+const formatWord = (text) => {
+	if(text.length <= 10) {
+		return text;
+	}
+	else
+		return text.slice(0,6) + "...";
+}
+// onLoad(() => {
+// 	const db = uniCloud.database();
+// 	db.collection('server_list').get().then((res) => {
+// 			chat_views = res.result.data
+// 			console.log("获取用户信息:",chat_views);
+// 		})
+// 		.catch((error) => {
+// 			console.log(error);
+// 		})
+// })
 </script>
 
 <style lang="scss" scoped>

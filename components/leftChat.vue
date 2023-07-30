@@ -58,13 +58,13 @@
 	.text-container::before {
 		position: absolute;
 		top: 15px;
-		left: -19px;
+		left: -12px;
 		content: "";
 		width: 0;
 		height: 0;
-		border-right: 10px solid #fff;
-		border-bottom: 10px solid transparent;
-		border-left: 10px solid transparent;
-		border-top: 10px solid transparent;
+		border-right: 6px solid #fff;
+		border-bottom: 6px solid transparent;
+		border-left: 6px solid transparent;
+		border-top: 6px solid transparent;
 	}
 </style>
