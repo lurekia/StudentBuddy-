@@ -72,11 +72,11 @@ const formatDate = (time) => {
 	return someDate.toLocaleDateString();
 }
 const formatWord = (text) => {
-	if(text.length <= 10) {
+	if(text.length <= 20) {
 		return text;
 	}
 	else
-		return text.slice(0,6) + "...";
+		return text.slice(0,17) + "...";
 }
 // onLoad(() => {
 // 	const db = uniCloud.database();

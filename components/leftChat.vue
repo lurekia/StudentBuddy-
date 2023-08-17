@@ -24,7 +24,11 @@
 		return htmlText;
 	}
 	onLoad((obj) => {
-		content.value = mdToHtml(props.msg.content);
+		if(props.msg.tag === "markdown") {
+			content.value = mdToHtml(props.msg.content);
+		} else {
+			content.value = props.msg.content;
+		}
 	})
 </script>
 <style lang="scss" scoped>

@@ -150,9 +150,9 @@ import rightChat from '@/components/rightChat.vue'
 	onUnload(() => {
 		// uni.$off('listToChat');
 		// 更新聊天列表
-		myChatList.doc(server_chat_id).update({
-			list:msgs.value
-		})
+		// myChatList.doc(server_chat_id).update({
+		// 	list:msgs.value
+		// })
 	})
 	
 </script>
