@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 	<view class="page">
 		<view class="homeHeader">
 			<img src="../../static/homeHeader.png" style="width: 100%;">
@@ -181,4 +182,22 @@
 	
 	
 	
+=======
+	<view>
+		<!-- <web-view src="http://127.0.0.1:5173/"></web-view> -->
+	</view>
+</template>
+
+<script setup>
+	
+</script>
+
+<style>
+#map {
+  height: 80vw;
+  width: 80vw;
+  margin: 100px 10vw;
+  background-color: purple;
+}
+>>>>>>> 1f3e0e6725cd9f2f14e1664aeba701ecf80f60a0
 </style>

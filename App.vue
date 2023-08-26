@@ -1,7 +1,16 @@
 <script>
+	//1. 导入uni身份信息管理模块
+	import uniIdPagesInit from '@/uni_modules/uni-id-pages/init.js';
+	//2. 导入uniIm的Utils工具类
+	import uniImUtils from '@/uni_modules/uni-im/common/utils.js';
 	export default {
-		onLaunch: function() {
+		onLaunch: async function() {
 			console.log('App Launch')
+			//3. 初始化uni身份信息管理模块
+			uniIdPagesInit();
+			//4. 初始化uniIm
+			uniImUtils.init();
+			console.log('初始化完毕');
 		},
 		onShow: function() {
 			console.log('App Show')

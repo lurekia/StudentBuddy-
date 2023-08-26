@@ -4,8 +4,8 @@
 		<view class="header">
 			<text class="title">Student Buddy</text>
 			<view class="tool">
-				<text class="iconfont icon-tianjiahaoyou icon"></text>
-				<text class="iconfont icon-danlieliebiao icon"></text>
+				<text class="iconfont icon-tianjiahaoyou icon" @click="toContacts()"></text>
+				<text class="iconfont icon-danlieliebiao icon" ></text>
 			</view>
 		</view>
 		<!-- 所有好友列表 -->
@@ -23,33 +23,33 @@
 				</li>
 			</ul>
 		</scroll-view> -->
-		<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" :options="options" collection="server_list" orderby="last_word_date desc">
-		  <view v-if="error">{{error.message}}</view>
-		  <view v-else-if="loading">
-		    <uni-load-more :contentText="loadMore" status="loading"></uni-load-more>
-		  </view>
-		  <view v-else-if="data">
-			<uni-list>
-				<uni-list :border="true">
-					<uni-list-chat 
-					 v-for="chat in data" 
-					 :key="chat._id"
-					:title="chat.name" 
-					:avatar="chat.avatar" 
-					:note="formatWord(chat.last_word)" 
-					:time="formatDate(chat.last_word_date)" 
-					 :clickable="true"
-					@click="handleClick(chat)"
-					></uni-list-chat>
-				</uni-list>
+		
+		<scroll-view id="user-list-box" scroll-y="true">
+			<!-- 会话用户列表 -->
+			<uni-list :border="true">
+				<uni-list-chat
+				 v-for="(chat,index) in chatList" 
+				 :key="chat.id"
+				 :showBadge="chat.unread_count>0"
+				 :badgeText="chat.unread_count"
+				 :title="chat.title" 
+				 :avatar="chat.avatar_file&&chat.avatar_file.url ? chat.avatar_file.url : '/uni_modules/uni-im/static/avatarUrl.png'" 
+				 :note="chat.last_msg_note" 
+				 :time="friendlyTime(chat.update_time)"
+				 :clickable="true"
+				 @click="handleClick(chat.id)"
+				>
+				</uni-list-chat>
+
 			</uni-list>
-		  </view>
-		</unicloud-db>
+		</scroll-view>
+		
 		
 	</view>
 </template>
 
 <script setup>
+<<<<<<< HEAD
 import {reactive, ref} from 'vue'
 <<<<<<< HEAD
 
@@ -104,22 +104,109 @@ const handleClick = (chat) => {
 	console.log(chat);
 	uni.navigateTo({
 		url:`/pages/chat/chat?name=${chat.name}&url=${chat.avatar}&id=${chat._id}`, // 传递url感觉有点不好
+=======
+import {reactive, ref, computed} from 'vue'
+import {
+		onLoad
+	} from '@dcloudio/uni-app'
+import uniIm from '@/uni_modules/uni-im/lib/main.js';
+import uniImUtils from '@/uni_modules/uni-im/common/utils.js';
+import {
+	store as uniIdStore,
+	mutations as uniIdMutations
+} from '@/uni_modules/uni-id-pages/common/store.js';
+
+const db = uniCloud.database();
+
+// 获取对话信息
+let sortIndex = 0;
+const chatList = computed(() => {
+	sortIndex ++
+	// console.log('根据会话时间排序',uniIm.conversation.dataList,sortIndex)
+	let conversationList = uniIm.conversation.dataList
+	setTimeout(()=> {
+		sortIndex = 0
+	}, 1000);
+	if(sortIndex > 6){
+		return conversationList
+	}
+	return conversationList.sort(function(a, b) {
+		if(b.id == uniIm.currentConversationId) {
+			// 当前会话正在输入时，不需要重新排序避免change频繁触发导致排序频繁 
+			return 0
+		}
+		// 如果该会话的输入框已经输入了内容未发就排在前面
+		if(b.chatText){
+			b.update_time = Date.now()
+		}
+>>>>>>> 1f3e0e6725cd9f2f14e1664aeba701ecf80f60a0
 		
+		let a_update_time = a.update_time || 0
+		let b_update_time = b.update_time || 0
+		
+		let aml = a.msgList.length
+		let bml = b.msgList.length
+		
+		if (aml) {
+			let create_time = a.msgList[aml - 1].create_time
+			if (create_time > a_update_time) {
+				a_update_time = create_time
+			}
+		}
+		if (bml) {
+			let create_time = b.msgList[bml - 1].create_time
+			if (create_time > b_update_time) {
+				b_update_time = create_time
+			}
+		}
+		return b_update_time - a_update_time
 	})
-	console.log("父组件中：",udb);
+})
+	// 加载更多
+const loadMore = async function() {
+	let data = await uniIm.conversation.loadMore()
+	return data
+}
+
+
+// 点击跳转聊天界面
+const handleClick = (chatId) => {
+	console.log(chatId);
+	uniIm.currentConversationId = chatId
+	uni.navigateTo({
+		url: '/uni_modules/uni-im/pages/chat/chat?conversation_id=' + chatId,
+		animationDuration: 300
+	})
+	// uni.navigateTo({
+	// 	url:`/pages/chat/chat?name=${chat.name}&url=${chat.avatar}&id=${chat._id}`, // 传递url感觉有点不好
+		
+	// })
 	// console.log("传输信息给下一个");
 	// uni.$emit('listToChat',chat.avatar)
 }
-const formatDate = (time) => {
-	const someDate = new Date(time);
-	return someDate.toLocaleDateString();
+// const formatDate = (time) => {
+// 	const someDate = new Date(time);
+// 	return someDate.toLocaleDateString();
+// }
+// const formatWord = (text) => {
+// 	if(text.length <= 20) {
+// 		return text;
+// 	}
+// 	else
+// 		return text.slice(0,17) + "...";
+// }
+
+// 添加朋友
+
+const toContacts = () => {
+	uni.navigateTo({
+		url:`/uni_modules/uni-im/pages/contacts/contacts`, 
+	})
 }
-const formatWord = (text) => {
-	if(text.length <= 20) {
-		return text;
-	}
-	else
-		return text.slice(0,17) + "...";
+
+// 时间转换
+const friendlyTime = (timestamp) => {
+	return uniImUtils.toFriendlyTime(timestamp)
 }
 // onLoad(() => {
 // 	const db = uniCloud.database();
