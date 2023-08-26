@@ -40,6 +40,16 @@
 		    }
 		    
 		},
+		{
+		    "path" : "pages/activityDetail/activityDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "行程",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
         {
             "path" : "pages/me/me",
             "style" :                                                                                    

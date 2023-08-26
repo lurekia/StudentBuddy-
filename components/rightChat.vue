@@ -42,13 +42,13 @@ const props = defineProps(["head_img_url","msg"])
 .text-container::before {
 		position: absolute;
 		top: 15px;
-		right: -19px;
+		right: -12px;
 		content: "";
 		width: 0;
 		height: 0;
-		border-right: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-		border-left: 10px solid rgb(150,236,102);
-		border-top: 10px solid transparent;
+		border-right: 6px solid transparent;
+		border-bottom: 6px solid transparent;
+		border-left: 6px solid rgb(150,236,102);
+		border-top: 6px solid transparent;
 	}
 </style>
