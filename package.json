@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "leaflet": "^1.9.4",
     "markdown-it": "^13.0.1"
   },
   "name": "studentbuddy-",
