@@ -26,7 +26,6 @@
 
 		},
 		{
-<<<<<<< HEAD
 		    "path" : "pages/activityDetail/activityDetail",
 		    "style" :                                                                                    
 		    {
@@ -37,17 +36,10 @@
 		    
 		},
         {
-            "path" : "pages/me/me",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的",
-                "enablePullDownRefresh": false,
-=======
 			"path": "pages/activityList/activityList",
 			"style": {
 				"navigationBarTitleText": "活动列表",
 				"enablePullDownRefresh": false,
->>>>>>> 1f3e0e6725cd9f2f14e1664aeba701ecf80f60a0
 				"navigationStyle": "custom"
 			}
 

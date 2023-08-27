@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
 	<view class="page">
 		<view class="homeHeader">
 			<img src="../../static/homeHeader.png" style="width: 100%;">
@@ -11,21 +10,17 @@
 					今日威海下雨，记得带伞哦~
 				</view>
 			</view>
-			
-			
-			
 			<view class="part-in">
 				<view class="part-in-text">
 					猜你想参加
 				</view>
 				<turns :data="data" @achieve="achieve"></turns>
 			</view>
-			
 		</view>
 	</view>
 </template>
 
-<script setup >
+<script setup>
 	import turns from '../../components/pc-turns/pc-turns.vue'
 	import {
 		ref,
@@ -117,7 +112,8 @@
 		detail:'56656556',
 		status:1,
 		viewNum:0
-	},{
+	},
+	{
 		src:'https://cdn.pixabay.com/photo/2022/03/31/14/53/camp-7103189_1280.png',
 		date:'2023-08-20',
 		time:'9:00',
@@ -180,24 +176,5 @@
 		
 	}
 	
-	
-	
-=======
-	<view>
-		<!-- <web-view src="http://127.0.0.1:5173/"></web-view> -->
-	</view>
-</template>
 
-<script setup>
-	
-</script>
-
-<style>
-#map {
-  height: 80vw;
-  width: 80vw;
-  margin: 100px 10vw;
-  background-color: purple;
-}
->>>>>>> 1f3e0e6725cd9f2f14e1664aeba701ecf80f60a0
 </style>
